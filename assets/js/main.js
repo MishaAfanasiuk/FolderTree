@@ -12,7 +12,7 @@ const changeState = (element) => {
 };
 const highlight = (element) => {
   element.classList.toggle('active');
-  lastSelected = element;
+  lastSelected = element.parentNode;
 
 };
 
@@ -27,30 +27,30 @@ const unHighlightAll = () => {
 const a = (firstElement, secondElement) => {
   let flag = false;
   firstElement.children[0].classList.toggle('active', true);
-  while (firstElement.querySelector('.show-sub-folder')) {
-    firstElement = firstElement.querySelector('.show-sub-folder');
-    firstElement.children[0].classList.toggle('active', true);
-    if (firstElement === secondElement) {
-      flag = true;
-      break;
+  label:
+  while (firstElement !== secondElement) {
+    while (firstElement.querySelector('.show-sub-folder') && !flag) {
+      firstElement = firstElement.querySelector('.show-sub-folder');
+      firstElement.children[0].classList.toggle('active', true);
+      if (firstElement === secondElement) break label;
     }
-  }
-  while (!flag) {
-    if (firstElement === secondElement) {
-      break;
-    }
+    flag = true;
     if (firstElement.nextElementSibling) {
       firstElement = firstElement.nextElementSibling;
+      flag = false;
       firstElement.children[0].classList.toggle('active', true);
     } else {
       firstElement = firstElement.parentNode;
     }
   }
 };
-const multiplyHighlight2 = (secondElement, firstElement = lastSelected.parentElement) => {
-  if (firstElement.compareDocumentPosition(secondElement) === 4 || firstElement.compareDocumentPosition(secondElement) === 20) {
+
+const multiplyHighlight = (secondElement) => {
+  const firstElement = lastSelected;
+  const comparePosition = firstElement.compareDocumentPosition(secondElement);
+  if (comparePosition === 4 || comparePosition === 20) {
     a(firstElement, secondElement);
-  } else if (firstElement.compareDocumentPosition(secondElement) === 2 || firstElement.compareDocumentPosition(secondElement) === 10) {
+  } else if (comparePosition === 2 || comparePosition === 10) {
     a(secondElement, firstElement);
   }
 };
@@ -58,11 +58,11 @@ const multiplyHighlight2 = (secondElement, firstElement = lastSelected.parentEle
 const checkClick = (event) => {
   const target = event.target.closest('.items-container');
   if (target) {
-    if (target.tagName === 'SPAN' && event.ctrlKey) {
+    if (!!target && event.ctrlKey) {
       highlight(target);
-    } else if (target.tagName === 'SPAN' && event.shiftKey && lastSelected !== '') {
-      multiplyHighlight2(target.parentElement);
-    } else if (!!target && target.tagName === 'SPAN' && target.nextElementSibling !== null) {
+    } else if (!!target && event.shiftKey && lastSelected !== '') {
+      multiplyHighlight(target.parentElement);
+    } else if (!!target && target.nextElementSibling !== null) {
       const nextElement = target.nextElementSibling;
       changeState(nextElement);
     }
@@ -75,10 +75,10 @@ window.onload = () => {
   let elements = folders.getElementsByTagName('div');
   elements = Array.prototype.slice.call(elements);
   elements.forEach((item) => {
-    if (item.getElementsByTagName('div').length) {
+    if (item.querySelector('div')) {
       const img = document.createElement('img');
-      img.setAttribute('src', 'assets/images/triangle-icon.svg');
-      img.className = 'icon';
+      img.setAttribute('src', 'assets/images/triangle-icon.png');
+      img.className = 'triangle-icon-size';
       console.log(item.children[0].children[0]);
       item = item.children[0];
       item.insertBefore(img, item.children[0]);
