@@ -1,4 +1,3 @@
-# PDFfillerHW3
+# PDFfiller home work #3
 
-PDFfiller home work #3
-Simple folder system
+Simple folder system based on css and js
