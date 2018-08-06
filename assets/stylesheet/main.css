@@ -35,7 +35,7 @@ body {
 
 .active {
   font-size: 21px;
-  background-color: aliceblue;
+  background-color: #bef0ff;
 }
 
 .items-container {
@@ -47,7 +47,7 @@ body {
 }
 
 .items-container:hover {
-  background-color: aliceblue;
+  background-color: #bef0ff;
 }
 
 .show-sub-folder{
