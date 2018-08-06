@@ -1,0 +1,81 @@
+body {
+  font-size: 20px;
+  width: 100%;
+  height: 100vh;
+}
+.sub-folder{
+  display: none;
+}
+
+.folder{
+  width: 100%;
+}
+
+.file{
+  display: none;
+}
+
+.icon{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  padding-left: 10px;
+}
+
+.triangle-icon-size{
+  width: 10px;
+  height: 10px;
+  margin-left: -10px;
+}
+
+#folders-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.active {
+  font-size: 21px;
+  background-color: #bef0ff;
+}
+
+.items-container {
+  cursor: pointer;
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
+
+.items-container:hover {
+  background-color: #bef0ff;
+}
+
+.show-sub-folder{
+  display: block;
+}
+
+.triangle-icon{
+  transform: rotate(90deg);
+}
+
+.sub-1 {
+  padding-left: 40px;
+}
+
+.sub-2 {
+  padding-left: 60px;
+}
+
+.sub-3 {
+  padding-left: 80px;
+}
+
+.instruction {
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.instruction-title{
+  margin-bottom: 10px;
+  color: #00ADFF;
+}
